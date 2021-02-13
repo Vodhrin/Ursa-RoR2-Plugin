@@ -1,0 +1,11 @@
+{
+    "name": "UrsaSurvivorMod",
+    "version_number": "0.1.0",
+    "website_url": "https://discord.gg/bYGV6s6",
+    "description": "Adds Ursa from Dota 2 as a playable survivor.",
+    "dependencies": 
+	[
+        "tristanmcpherson-R2API-2.5.14",
+		"bbepis-BepInExPack-5.3.1"
+    ]
+}
