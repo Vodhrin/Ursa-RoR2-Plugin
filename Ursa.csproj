@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Thunderstore Package\**" />
+    <EmbeddedResource Remove="Thunderstore Package\**" />
+    <None Remove="Thunderstore Package\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="thiriosurvivorbundle" />
     <None Remove="UrsaSoundbank.bnk" />
     <None Remove="ursasurvivorbundle" />
