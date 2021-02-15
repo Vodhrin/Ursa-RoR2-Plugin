@@ -40,6 +40,7 @@ namespace Ursa.Core
         public static ConfigEntry<int> secondaryBaseCharges;
         public static ConfigEntry<float> secondaryBaseCooldown;
 
+        public static ConfigEntry<bool> utilityRocksEffect;
         public static ConfigEntry<float> utilityDamageCoefficient;
         public static ConfigEntry<float> utilityProcCoefficient;
         public static ConfigEntry<float> utilityForce;
@@ -94,6 +95,7 @@ namespace Ursa.Core
             secondaryBaseCharges = UrsaPlugin.instance.Config.Bind<int>(new ConfigDefinition("04 - Secondary - Overpower", "Base Charges"), Core.Constants.ursaSecondaryBaseCharges, new ConfigDescription("", null, Array.Empty<object>()));
             secondaryBaseCooldown = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("04 - Secondary - Overpower", "Base Cooldown"), Core.Constants.ursaSecondaryBaseCooldown, new ConfigDescription("", null, Array.Empty<object>()));
 
+            utilityRocksEffect = UrsaPlugin.instance.Config.Bind<bool>(new ConfigDefinition("05 - Utility - Earthshock", "Rock Kickup Effect"), Core.Constants.ursaUtilityRocksEffect, new ConfigDescription("", null, Array.Empty<object>()));
             utilityDamageCoefficient = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("05 - Utility - Earthshock", "Damage Coefficient"), Core.Constants.ursaUtilityDamageCoefficient, new ConfigDescription("", null, Array.Empty<object>()));
             utilityProcCoefficient = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("05 - Utility - Earthshock", "Proc Coefficient"), Core.Constants.ursaUtilityProcCoefficient, new ConfigDescription("", null, Array.Empty<object>()));
             utilityForce = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("05 - Utility - Earthshock", "Force"), Core.Constants.ursaUtilityForce, new ConfigDescription("", null, Array.Empty<object>()));

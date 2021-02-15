@@ -22,7 +22,7 @@ namespace Ursa
 {
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
-    [BepInPlugin("com.Vodhr.UrsaSurvivor", "Ursa Survivor", "0.2.0")]
+    [BepInPlugin("com.Vodhr.UrsaSurvivor", "Ursa Survivor", "0.2.1")]
     [R2APISubmoduleDependency(new string[]
     {
         "PrefabAPI",
@@ -66,6 +66,7 @@ namespace Ursa
             InitializeBuffs();
             InitializeSkills();
             InitializeSounds();
+            InitializeEffects();
             InitializeINetMessages();
             CreateDoppelganger();
 
@@ -672,6 +673,18 @@ namespace Ursa
 
             };
 
+        }
+
+        private void InitializeEffects()
+        {
+            if (!Core.Config.utilityRocksEffect.Value)
+            {
+                var rocks = Core.Assets.earthshockEffect.transform.Find("RockKickUp").gameObject;
+                if (rocks)
+                {
+                    UnityEngine.Object.Destroy(Core.Assets.earthshockEffect.transform.Find("RockKickUp").gameObject);
+                }
+            }
         }
 
         private void InitializeINetMessages()

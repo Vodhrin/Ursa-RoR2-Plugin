@@ -37,6 +37,7 @@
         public const int ursaSecondaryBaseCharges = 5;
         public const float ursaSecondaryBaseCooldown = 2f;
 
+        public const bool ursaUtilityRocksEffect = true;
         public const float ursaUtilityDamageCoefficient = 1.5f;
         public const float ursaUtilityProcCoefficient = 0f;
         public const float ursaUtilityForce = 500f;
