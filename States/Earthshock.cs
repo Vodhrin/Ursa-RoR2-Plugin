@@ -6,7 +6,6 @@ using RoR2.Networking;
 using RoR2.Audio;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
-using Ursa.Core;
 using EntityStates;
 
 namespace Ursa.States
@@ -17,16 +16,14 @@ namespace Ursa.States
 
     class Earthshock : BaseSkillState
     {
-        public static float damageCoefficient = 1.5f;
-        public static float procCoefficient = 0f;
-        public static float force = 500f;
-        public static float radius = 20f;
-        public static float bonusMoveSpeed = 0.3f;
-        public static float bonusJumpHeight = 0.25f;
-        public static float buffDuration = 3f;
+        public static float damageCoefficient = Core.Config.utilityDamageCoefficient.Value;
+        public static float procCoefficient = Core.Config.utilityProcCoefficient.Value;
+        public static float force = Core.Config.utilityForce.Value;
+        public static float radius = Core.Config.utilityRadius.Value;
+        public static float buffDuration = Core.Config.utilityBuffDuration.Value;
         public static float downwardForce = 65f;
-        public static float debuffDuration = 5f;
-        public static float debuffSlow = 0.5f;
+        public static float debuffDuration = Core.Config.utilityDebuffDuration.Value;
+        public static float debuffSlow = Core.Config.utilityDebuffSlow.Value;
 
         private GameObject effect;
         private bool airSlam;
@@ -35,7 +32,7 @@ namespace Ursa.States
         public override void OnEnter()
         {
             base.OnEnter();
-            this.effect = Resources.Load<GameObject>("prefabs/effects/impacteffects/CharacterLandImpact");
+            this.effect = Core.Assets.earthshockEffect;
 
             this.airSlamActive = false;
 
@@ -59,7 +56,7 @@ namespace Ursa.States
                     NetworkIdentity networkIdentity = base.gameObject.GetComponent<NetworkIdentity>();
                     if (networkIdentity)
                     {
-                        new NetMessages.BodyFlagsMessage(networkIdentity.netId, CharacterBody.BodyFlags.IgnoreFallDamage)
+                        new Core.NetMessages.BodyFlags(networkIdentity.netId, CharacterBody.BodyFlags.IgnoreFallDamage)
                             .Send(NetworkDestination.Server);
                     }
                 }
@@ -80,7 +77,7 @@ namespace Ursa.States
                     NetworkIdentity networkIdentity = base.gameObject.GetComponent<NetworkIdentity>();
                     if (networkIdentity)
                     {
-                        new NetMessages.RemoveBodyFlagsMessage(networkIdentity.netId, CharacterBody.BodyFlags.IgnoreFallDamage)
+                        new Core.NetMessages.RemoveBodyFlags(networkIdentity.netId, CharacterBody.BodyFlags.IgnoreFallDamage)
                             .Send(NetworkDestination.Server);
                     }
                 }
@@ -92,24 +89,24 @@ namespace Ursa.States
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-    
-            if(!this.airSlam)
+
+            if (!this.airSlam)
             {
                 Slam();
-                if(base.isAuthority) this.outer.SetNextStateToMain();
+                if (base.isAuthority) this.outer.SetNextStateToMain();
             }
 
-            if(base.isAuthority && this.airSlam && !this.airSlamActive)
+            if (base.isAuthority && this.airSlam && !this.airSlamActive)
             {
                 this.airSlamActive = true;
                 base.characterMotor.disableAirControlUntilCollision = true;
                 base.characterMotor.velocity -= new Vector3(0f, Earthshock.downwardForce, 0f);
             }
 
-            if(this.airSlamActive && !base.characterMotor.disableAirControlUntilCollision && base.isGrounded)
+            if (this.airSlamActive && !base.characterMotor.disableAirControlUntilCollision && base.isGrounded)
             {
                 Slam();
-               if(base.isAuthority) this.outer.SetNextStateToMain();
+                if (base.isAuthority) this.outer.SetNextStateToMain();
             }
 
         }
@@ -119,23 +116,24 @@ namespace Ursa.States
             return InterruptPriority.PrioritySkill;
         }
 
-        private void Slam() 
+        private void Slam()
         {
             EffectManager.SpawnEffect(effect, new EffectData
             {
                 origin = base.characterBody.footPosition + new Vector3(0, 0.15f, 0),
-                scale = 6f
+                rotation = base.transform.rotation,
+                scale = 100f
             }, true);
-            PlaySound(Assets.ursaEarthshockSound, base.gameObject);
+            Core.Utils.PlayNetworkedSound(Core.Assets.ursaEarthshockSound, base.gameObject);
             PlayCrossfade("Gesture, Override", "Smash", 0.1f);
             if (ClientScene.readyConnection != null)
             {
-                PlayAnimationOnOtherClients(base.gameObject, "Gesture, Override", "Smash", 1f);
+                Core.Utils.PlayAnimationOnOtherClients(base.gameObject, "Gesture, Override", "Smash", 1f);
             }
 
             Explode();
 
-            ApplyNetworkedTimedBuff(base.gameObject, UrsaPlugin.earthshockBuff, 1, Earthshock.buffDuration);
+            Core.Utils.ApplyNetworkedTimedBuff(base.gameObject, UrsaPlugin.earthshockBuff, 1, Earthshock.buffDuration);
 
         }
 
@@ -165,7 +163,7 @@ namespace Ursa.States
 
             if (NetworkServer.active)
             {
-                foreach(Collider i in colliders)
+                foreach (Collider i in colliders)
                 {
                     if (!i || !i.gameObject.GetComponent<CharacterBody>() || i.gameObject.GetComponent<TeamComponent>().teamIndex == base.GetTeam()) continue;
                     i.gameObject.GetComponent<CharacterBody>().AddTimedBuff(UrsaPlugin.earthshockDebuff, Earthshock.debuffDuration);
@@ -179,56 +177,11 @@ namespace Ursa.States
                     NetworkIdentity networkIdentity = i.gameObject.GetComponent<NetworkIdentity>();
                     if (networkIdentity)
                     {
-                        new NetMessages.TimedBuffMessage(networkIdentity.netId, UrsaPlugin.earthshockDebuff, 1, Earthshock.debuffDuration)
+                        new Core.NetMessages.TimedBuff(networkIdentity.netId, UrsaPlugin.earthshockDebuff, 1, Earthshock.debuffDuration)
                             .Send(NetworkDestination.Server);
                     }
                 }
             }
         }
-
-        private void PlaySound(string soundName, GameObject gameObject, float rate = 1)
-        {
-            NetworkIdentity networkIdentity = gameObject.GetComponent<NetworkIdentity>();
-            if (networkIdentity)
-            {
-                new NetMessages.SoundMessage(networkIdentity.netId, soundName)
-                    .Send(NetworkDestination.Clients);
-            }
-        }
-
-        private void PlayAnimationOnOtherClients(GameObject gameObject, string layerName, string animationStateName, float duration)
-        {
-            NetworkIdentity networkIdentity = gameObject.GetComponent<NetworkIdentity>();
-            if (networkIdentity)
-            {
-                new NetMessages.AnimationMessage(networkIdentity.netId, layerName, animationStateName, duration)
-                    .Send(NetworkDestination.Clients);
-            }
-        }
-
-        private void ApplyNetworkedTimedBuff(GameObject gameObject, BuffIndex buffIndex, int stacks, float duration)
-        {
-            CharacterBody characterBody = gameObject.GetComponent<CharacterBody>();
-
-            if (characterBody)
-            {
-                if (NetworkServer.active)
-                {
-                    for (int i = 0; i < stacks; i++)
-                    {
-                        characterBody.AddTimedBuff(buffIndex, duration);
-                    }
-                }
-                else
-                {
-                    NetworkIdentity networkIdentity = gameObject.GetComponent<NetworkIdentity>();
-                    if (networkIdentity)
-                    {
-                        new NetMessages.TimedBuffMessage(networkIdentity.netId, buffIndex, stacks, duration)
-                            .Send(NetworkDestination.Server);
-                    }
-                }
-            }
-        }
-    }
+    }   
 }

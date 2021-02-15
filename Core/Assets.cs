@@ -1,8 +1,9 @@
 ﻿using System.IO;
 using System.Reflection;
 using RoR2;
-using R2API;
 using UnityEngine;
+using UnityEngine.Networking;
+using R2API;
 
 namespace Ursa.Core
 {
@@ -27,6 +28,8 @@ namespace Ursa.Core
 
         public static NetworkSoundEventDef ursaHitNetworkSoundEventDef;
 
+        public static GameObject earthshockEffect;
+
         public static void InitializeAssets()
         {
 
@@ -46,12 +49,34 @@ namespace Ursa.Core
             icon5 = MainAssetBundle.LoadAsset<Sprite>("Skill5Icon");
             portrait = MainAssetBundle.LoadAsset<Sprite>("Portrait");
 
+            earthshockEffect = LoadCustomEffect("earthshockEffect", "");
+
             using (Stream manifestResourceStream2 = Assembly.GetExecutingAssembly().GetManifestResourceStream("Ursa.UrsaSoundbank.bnk"))
             {
                 byte[] array = new byte[manifestResourceStream2.Length];
                 manifestResourceStream2.Read(array, 0, array.Length);
                 SoundAPI.SoundBanks.Add(array);
             }
+        }
+
+        //Yoinked from rob's PaladinMod :)
+        private static GameObject LoadCustomEffect(string resourceName, string soundName)
+        {
+            GameObject newEffect = MainAssetBundle.LoadAsset<GameObject>(resourceName);
+
+            newEffect.AddComponent<DestroyOnTimer>().duration = 12;
+            newEffect.AddComponent<NetworkIdentity>();
+            newEffect.AddComponent<VFXAttributes>().vfxPriority = VFXAttributes.VFXPriority.Always;
+            var effect = newEffect.AddComponent<EffectComponent>();
+            effect.applyScale = false;
+            effect.effectIndex = EffectIndex.Invalid;
+            effect.parentToReferencedTransform = true;
+            effect.positionAtReferencedTransform = true;
+            effect.soundName = soundName;
+
+            EffectAPI.AddEffect(newEffect);
+
+            return newEffect;
         }
     }
 }
