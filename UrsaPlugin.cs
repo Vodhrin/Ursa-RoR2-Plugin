@@ -2,27 +2,27 @@
 using System.IO;
 using System.Reflection;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+using RoR2;
+using RoR2.Audio;
+using RoR2.Skills;
+using RoR2.Projectile;
+using RoR2.CharacterAI;
 using BepInEx;
 using BepInEx.Configuration;
 using R2API;
 using R2API.Utils;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
-using RoR2;
-using RoR2.Audio;
-using RoR2.Skills;
-using RoR2.Projectile;
-using RoR2.CharacterAI;
 using EntityStates;
-using UnityEngine;
-using UnityEngine.Networking;
 using KinematicCharacterController;
 
 namespace Ursa
 {
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
-    [BepInPlugin("com.Vodhr.UrsaSurvivor", "Ursa Survivor", "0.1.0")]
+    [BepInPlugin("com.Vodhr.UrsaSurvivor", "Ursa Survivor", "0.2.0")]
     [R2APISubmoduleDependency(new string[]
     {
         "PrefabAPI",

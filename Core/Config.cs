@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 using BepInEx.Configuration;
 
 namespace Ursa.Core
@@ -34,6 +33,7 @@ namespace Ursa.Core
         public static ConfigEntry<float> primaryBaseAttackDuration;
         public static ConfigEntry<float> primaryDamageCoefficient;
         public static ConfigEntry<float> primaryProcCoefficient;
+        public static ConfigEntry<float> primaryHopVelocity;
 
         public static ConfigEntry<float> secondaryAttackSpeedMult;
         public static ConfigEntry<float> secondaryBuffDuration;
@@ -87,6 +87,7 @@ namespace Ursa.Core
             primaryDamageCoefficient = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("03 - Primary - Sharp Claws", "Damage Coefficient"), Core.Constants.ursaPrimaryDamageCoefficient, new ConfigDescription("", null, Array.Empty<object>()));
             primaryBaseAttackDuration = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("03 - Primary - Sharp Claws", "Base Attack Duration"), Core.Constants.ursaPrimaryBaseAttackDuration, new ConfigDescription("", null, Array.Empty<object>()));
             primaryProcCoefficient = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("03 - Primary - Sharp Claws", "Proc Coefficient"), Core.Constants.ursaPrimaryProcCoefficient, new ConfigDescription("", null, Array.Empty<object>()));
+            primaryHopVelocity = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("03 - Primary - Sharp Claws", "On-Hit Upward Velocity"), Core.Constants.ursaPrimaryHopVelocity, new ConfigDescription("", null, Array.Empty<object>()));
 
             secondaryAttackSpeedMult = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("04 - Secondary - Overpower", "Attack Speed Multiplier"), Core.Constants.ursaSecondaryAttackSpeedMult, new ConfigDescription("", null, Array.Empty<object>()));
             secondaryBuffDuration = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("04 - Secondary - Overpower", "Buff Duration"), Core.Constants.ursaSecondaryBuffDuration, new ConfigDescription("", null, Array.Empty<object>()));

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ursa.Core
+﻿namespace Ursa.Core
 {
     class Constants
     {
-        public const float ursaBaseMaxHealth = 14f;
+        public const float ursaBaseMaxHealth = 135f;
         public const float ursaLevelMaxHealth = 75f;
         public const float ursaBaseRegen = 2.5f;
         public const float ursaLevelRegen = 1.1f;
@@ -34,6 +30,7 @@ namespace Ursa.Core
         public const float ursaPrimaryBaseAttackDuration = 1f;
         public const float ursaPrimaryDamageCoefficient = 1.5f;
         public const float ursaPrimaryProcCoefficient = 1f;
+        public const float ursaPrimaryHopVelocity = 7.5f;
 
         public const float ursaSecondaryAttackSpeedMult = 4f;
         public const float ursaSecondaryBuffDuration = 10f;

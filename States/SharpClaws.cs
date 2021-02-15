@@ -14,7 +14,9 @@ namespace Ursa.States
         public static float baseDuration = Core.Config.primaryBaseAttackDuration.Value;
         public static float damageCoefficient = Core.Config.primaryDamageCoefficient.Value;
         public static float procCoefficient = Core.Config.primaryProcCoefficient.Value;
+        public static float hopVelocity = Core.Config.primaryHopVelocity.Value;
 
+        private bool hasFired;
         private float duration;
         private Animator animator;
         private HitBoxGroup hitBoxGroup;
@@ -23,6 +25,7 @@ namespace Ursa.States
         {
             base.OnEnter();
             this.animator = base.GetModelAnimator();
+            this.hasFired = false;
 
             if (base.characterBody.HasBuff(UrsaPlugin.overpowerBuff))
             {
@@ -47,8 +50,6 @@ namespace Ursa.States
                 this.hitBoxGroup = base.FindHitBoxGroup("LeftClaw");
             }
 
-            Attack();
-
             Util.PlayScaledSound(Core.Assets.ursaSwingSound, base.gameObject,  this.attackSpeedStat);
             base.PlayAnimation("Gesture, Override", "Attack", "Attack.playbackRate" ,this.duration);
             if (ClientScene.readyConnection != null) 
@@ -68,6 +69,12 @@ namespace Ursa.States
         {
             base.FixedUpdate();
 
+            if(base.fixedAge >= this.duration/4 && !this.hasFired)
+            {
+                this.hasFired = true;
+                this.Attack();
+            }
+
             if(base.fixedAge >= this.duration)
             {
                 base.outer.SetNextStateToMain();
@@ -83,26 +90,30 @@ namespace Ursa.States
 
         private void Attack()
         {
+            OverlapAttack attack = new OverlapAttack
+            {
+                attacker = base.gameObject,
+                inflictor = base.gameObject,
+                damage = base.damageStat * SharpClaws.damageCoefficient,
+                damageColorIndex = DamageColorIndex.Default,
+                damageType = DamageType.Generic,
+                isCrit = Util.CheckRoll(this.critStat, this.characterBody.master),
+                hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ImpactImpSwipe"),
+                hitBoxGroup = hitBoxGroup,
+                impactSound = Core.Assets.ursaHitNetworkSoundEventDef.index,
+                procChainMask = default(ProcChainMask),
+                procCoefficient = SharpClaws.procCoefficient,
+                forceVector = Vector3.zero,
+                pushAwayForce = 400f,
+                teamIndex = base.GetTeam(),
+            };
 
             if (base.isAuthority)
             {
-                new OverlapAttack
+                if (attack.Fire() && !base.isGrounded)
                 {
-                    attacker = base.gameObject,
-                    inflictor = base.gameObject,
-                    damage = base.damageStat * SharpClaws.damageCoefficient,
-                    damageColorIndex = DamageColorIndex.Default,
-                    damageType = DamageType.Generic,
-                    isCrit = Util.CheckRoll(this.critStat, this.characterBody.master),
-                    hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ImpactImpSwipe"),
-                    hitBoxGroup = hitBoxGroup,
-                    impactSound = Core.Assets.ursaHitNetworkSoundEventDef.index,
-                    procChainMask = default(ProcChainMask),
-                    procCoefficient = SharpClaws.procCoefficient,
-                    forceVector = Vector3.zero,
-                    pushAwayForce = 400f,
-                    teamIndex = base.GetTeam(),
-                }.Fire();
+                    base.SmallHop(base.characterMotor, SharpClaws.hopVelocity);
+                }
             }
         }
     }
