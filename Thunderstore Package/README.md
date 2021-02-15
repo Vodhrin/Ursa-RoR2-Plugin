@@ -6,14 +6,19 @@
 
 ![](https://i.imgur.com/1Q1FT9b.png)
 
-## Known Issues
--The fur material on his back is poopy looking because porting materials from Dota into Blender and then into Unity is not easy to do properly.
-
 ## Feedback/Engagement
 If you would like to leave feedback or discuss any of our mods with us, you can find us at:
 https://discord.gg/bYGV6s6
 
 ## Changelog
+
+0.1.1
+-Balance changes to make him more reliant on Fury Swipes and Enrage for damage.
+-Added config with all character stats and ability values for custom balancing.
+-Added basic crosshair.
+-Updated Earthshock effects.
+-Tweaked back fur material to look less weird.
+-Tweaked Overpower glow effects to appear on hands instead of wrists.
 
 0.1.0
 -Initial release.

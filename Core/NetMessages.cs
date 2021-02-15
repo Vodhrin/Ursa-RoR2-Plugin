@@ -13,18 +13,18 @@ namespace Ursa.Core
     internal class NetMessages
     {
 
-        public class TimedBuffMessage : INetMessage
+        public class TimedBuff : INetMessage
         {
             private NetworkInstanceId targetId;
             private BuffIndex buffIndex;
             private int stacks;
             private float duration;
 
-            public TimedBuffMessage()
+            public TimedBuff()
             {
             }
 
-            public TimedBuffMessage(NetworkInstanceId targetId, BuffIndex buffIndex, int stacks, float duration)
+            public TimedBuff(NetworkInstanceId targetId, BuffIndex buffIndex, int stacks, float duration)
             {
                 this.targetId = targetId;
                 this.buffIndex = buffIndex;
@@ -65,17 +65,17 @@ namespace Ursa.Core
             }
         }
 
-        public class RemoveTimedBuffMessage : INetMessage
+        public class RemoveTimedBuff : INetMessage
         {
             private NetworkInstanceId targetId;
             private BuffIndex buffIndex;
             private int stacks;
 
-            public RemoveTimedBuffMessage()
+            public RemoveTimedBuff()
             {
             }
 
-            public RemoveTimedBuffMessage(NetworkInstanceId targetId, BuffIndex buffIndex, int stacks)
+            public RemoveTimedBuff(NetworkInstanceId targetId, BuffIndex buffIndex, int stacks)
             {
                 this.targetId = targetId;
                 this.buffIndex = buffIndex;
@@ -121,17 +121,17 @@ namespace Ursa.Core
             }
         }
 
-        public class BodyFlagsMessage : INetMessage
+        public class BodyFlags : INetMessage
         {
             private NetworkInstanceId targetId;
             private CharacterBody.BodyFlags bodyFlag;
 
 
-            public BodyFlagsMessage()
+            public BodyFlags()
             {
             }
 
-            public BodyFlagsMessage(NetworkInstanceId targetId, CharacterBody.BodyFlags bodyFlag)
+            public BodyFlags(NetworkInstanceId targetId, CharacterBody.BodyFlags bodyFlag)
             {
                 this.targetId = targetId;
                 this.bodyFlag = bodyFlag;
@@ -163,16 +163,16 @@ namespace Ursa.Core
             }
         }
 
-        public class RemoveBodyFlagsMessage : INetMessage
+        public class RemoveBodyFlags : INetMessage
         {
             private NetworkInstanceId targetId;
             private CharacterBody.BodyFlags bodyFlag;
 
-            public RemoveBodyFlagsMessage()
+            public RemoveBodyFlags()
             {
             }
 
-            public RemoveBodyFlagsMessage(NetworkInstanceId targetId, CharacterBody.BodyFlags bodyFlag)
+            public RemoveBodyFlags(NetworkInstanceId targetId, CharacterBody.BodyFlags bodyFlag)
             {
                 this.targetId = targetId;
                 this.bodyFlag = bodyFlag;
@@ -209,17 +209,17 @@ namespace Ursa.Core
             }
         }
 
-        public class SoundMessage : INetMessage
+        public class Sound : INetMessage
         {
             private NetworkInstanceId targetId;
             private string soundName;
             private float rate;
 
-            public SoundMessage()
+            public Sound()
             {
             }
 
-            public SoundMessage(NetworkInstanceId targetId, string soundName, float rate = 1f)
+            public Sound(NetworkInstanceId targetId, string soundName, float rate = 1f)
             {
                 this.targetId = targetId;
                 this.soundName = soundName;
@@ -253,18 +253,18 @@ namespace Ursa.Core
             }
         }
 
-        public class AnimationMessage : INetMessage
+        public class Animation : INetMessage
         {
             private NetworkInstanceId targetId;
             private string layerName;
             private string animationStateName;
             private float duration;
 
-            public AnimationMessage()
+            public Animation()
             {
             }
 
-            public AnimationMessage(NetworkInstanceId targetId, string layerName, string animationStateName, float duration)
+            public Animation(NetworkInstanceId targetId, string layerName, string animationStateName, float duration)
             {
                 this.targetId = targetId;
                 this.layerName = layerName;
@@ -314,16 +314,16 @@ namespace Ursa.Core
             }
         }
 
-        public class UrsaResizeMessage : INetMessage
+        public class UrsaResize : INetMessage
         {
             private NetworkInstanceId targetId;
             private Vector3 targetScale;
 
-            public UrsaResizeMessage()
+            public UrsaResize()
             {
             }
 
-            public UrsaResizeMessage(NetworkInstanceId targetId, Vector3 targetScale)
+            public UrsaResize(NetworkInstanceId targetId, Vector3 targetScale)
             {
                 this.targetId = targetId;
                 this.targetScale = targetScale;
@@ -361,16 +361,16 @@ namespace Ursa.Core
             }
         }
 
-        public class UrsaHandsGlowMessage : INetMessage
+        public class UrsaHandsGlow : INetMessage
         {
             private NetworkInstanceId targetId;
             private bool glow;
 
-            public UrsaHandsGlowMessage()
+            public UrsaHandsGlow()
             {
             }
 
-            public UrsaHandsGlowMessage(NetworkInstanceId targetId, bool glow)
+            public UrsaHandsGlow(NetworkInstanceId targetId, bool glow)
             {
                 this.targetId = targetId;
                 this.glow = glow;

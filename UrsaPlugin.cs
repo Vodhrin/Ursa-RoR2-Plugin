@@ -3,9 +3,11 @@ using System.IO;
 using System.Reflection;
 using System.Collections.Generic;
 using BepInEx;
+using BepInEx.Configuration;
 using R2API;
 using R2API.Utils;
 using R2API.Networking;
+using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Audio;
 using RoR2.Skills;
@@ -49,22 +51,25 @@ namespace Ursa
         public static BuffIndex enrageBuff;
         public static BuffIndex furySwipesDebuff;
 
-        internal static BepInEx.Logging.ManualLogSource logger;
+        public static BepInEx.Logging.ManualLogSource logger;
+        public static UrsaPlugin instance;
 
         public void Awake()
         {
+            instance = this;
+
             Core.Assets.InitializeAssets();
+            Core.Config.ReadConfig();
             CreateHooks();
             CreateCharacter();
             InitializeCharacter();
-            InitializeEffects();
             InitializeBuffs();
             InitializeSkills();
             InitializeSounds();
             InitializeINetMessages();
             CreateDoppelganger();
 
-            UrsaPlugin.logger = this.Logger;
+            logger = this.Logger;
         }
 
         private void CreateHooks()
@@ -74,7 +79,7 @@ namespace Ursa
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
         }
 
-        internal static void CreateCharacter() 
+        static void CreateCharacter() 
         {
             LanguageAPI.Add("URSA_NAME", "Ursa");
             LanguageAPI.Add("URSA_DESCRIPTION", "Angry bear." + Environment.NewLine);
@@ -108,7 +113,7 @@ namespace Ursa
             Transform transform = model.transform;
             transform.parent = gameObject.transform;
             transform.localPosition = Vector3.zero;
-            transform.localScale = UrsaPlugin.ursaBaseSize;
+            transform.localScale = new Vector3(1f, 1f, 1f);
             transform.localRotation = Quaternion.identity;
 
             CharacterDirection characterDirection = ursaBody.GetComponent<CharacterDirection>();
@@ -127,29 +132,30 @@ namespace Ursa
             bodyComponent.bodyFlags = CharacterBody.BodyFlags.ImmuneToExecutes;
             bodyComponent.rootMotionInMainState = false;
             bodyComponent.mainRootSpeed = 0;
-            bodyComponent.baseMaxHealth = 145;
-            bodyComponent.levelMaxHealth = 75;
-            bodyComponent.baseRegen = 2.5f;
-            bodyComponent.levelRegen = 1.1f;
-            bodyComponent.baseMaxShield = 0;
-            bodyComponent.levelMaxShield = 0;
-            bodyComponent.baseMoveSpeed = 7;
-            bodyComponent.levelMoveSpeed = 0;
-            bodyComponent.baseAcceleration = 80;
-            bodyComponent.baseJumpPower = 15;
-            bodyComponent.levelJumpPower = 0;
-            bodyComponent.baseDamage = 17;
-            bodyComponent.levelDamage = 3f;
-            bodyComponent.baseAttackSpeed = 1;
-            bodyComponent.levelAttackSpeed = 0;
-            bodyComponent.baseCrit = 1;
-            bodyComponent.levelCrit = 0;
-            bodyComponent.baseArmor = 40;
-            bodyComponent.levelArmor = 0;
-            bodyComponent.baseJumpCount = 1;
-            bodyComponent.sprintingSpeedMultiplier = 1.5f;
+            bodyComponent.baseMaxHealth = Core.Config.baseMaxHealth.Value;
+            bodyComponent.levelMaxHealth = Core.Config.levelMaxHealth.Value;
+            bodyComponent.baseRegen = Core.Config.baseRegen.Value;
+            bodyComponent.levelRegen = Core.Config.levelRegen.Value;
+            bodyComponent.baseMaxShield = Core.Config.baseMaxShield.Value;
+            bodyComponent.levelMaxShield = Core.Config.levelMaxShield.Value;
+            bodyComponent.baseMoveSpeed = Core.Config.baseMoveSpeed.Value;
+            bodyComponent.levelMoveSpeed = Core.Config.levelMoveSpeed.Value;
+            bodyComponent.baseAcceleration = Core.Config.baseAcceleration.Value;
+            bodyComponent.baseJumpPower = Core.Config.baseJumpPower.Value;
+            bodyComponent.levelJumpPower = Core.Config.levelJumpPower.Value;
+            bodyComponent.baseJumpCount = Core.Config.baseJumpCount.Value;
+            bodyComponent.baseDamage = Core.Config.baseDamage.Value;
+            bodyComponent.levelDamage = Core.Config.levelDamage.Value;
+            bodyComponent.baseAttackSpeed = Core.Config.baseAttackSpeed.Value;
+            bodyComponent.levelAttackSpeed = Core.Config.levelAttackSpeed.Value;
+            bodyComponent.baseCrit = Core.Config.baseCrit.Value;
+            bodyComponent.levelCrit = Core.Config.levelCrit.Value;
+            bodyComponent.baseArmor = Core.Config.baseArmor.Value;
+            bodyComponent.levelArmor = Core.Config.levelArmor.Value;
+            bodyComponent.sprintingSpeedMultiplier = Core.Config.sprintingSpeedMultiplier.Value;
             bodyComponent.wasLucky = false;
-            bodyComponent.hideCrosshair = true;
+            bodyComponent.hideCrosshair = false;
+            bodyComponent.crosshairPrefab = Resources.Load<GameObject>("prefabs/crosshair/simpledotcrosshair");
             bodyComponent.aimOriginTransform = gameObject3.transform;
             bodyComponent.hullClassification = HullClassification.Human;
             bodyComponent.portraitIcon = Core.Assets.portrait.texture;
@@ -412,11 +418,6 @@ namespace Ursa
             };
         }
 
-        private void InitializeEffects() 
-        { 
-
-        }
-
         private void InitializeBuffs()
         {
             BuffDef overpowerBuffDef = new BuffDef
@@ -484,17 +485,17 @@ namespace Ursa
 
         private void InitializeSkills() 
         {
+            LanguageAPI.Add("URSA_PASSIVE_NAME", "Fury Swipes");
+            LanguageAPI.Add("URSA_PASSIVE_DESCRIPTION", "Consecutive attacks on the same target deal <style=cIsDamage>"+ Core.Config.passiveBaseDamageMult.Value * 100 +"% more base damage</style>. If the same target is not attacked after 20 seconds, the bonus damage is lost.");
             LanguageAPI.Add("URSA_PRIMARY_NAME", "Sharp Claws");
-            LanguageAPI.Add("URSA_PRIMARY_DESCRIPTION", "Swipe at enemies in front of you, dealing <style=cIsDamage>150% damage</style>.");
+            LanguageAPI.Add("URSA_PRIMARY_DESCRIPTION", "Swipe at enemies in front of you, dealing <style=cIsDamage>"+ Core.Config.primaryDamageCoefficient.Value * 100 +"% damage</style>.");
             LanguageAPI.Add("URSA_SECONDARY_NAME", "Overpower");
-            LanguageAPI.Add("URSA_SECONDARY_DESCRIPTION", "For each charge consumed, you gain <style=cIsUtility>4x attack speed</style> on your next use of Sharp Claws. Has <style=cIsUtility>5 charges</style> at base.");
+            LanguageAPI.Add("URSA_SECONDARY_DESCRIPTION", "For each charge consumed, you gain <style=cIsUtility>"+ Core.Config.secondaryAttackSpeedMult.Value +"x attack speed</style> on your next use of Sharp Claws. Has <style=cIsUtility>"+ Core.Config.secondaryBaseCharges.Value +" charges</style> at base.");
             LanguageAPI.Add("URSA_UTILITY_NAME", "Earthshock");
-            LanguageAPI.Add("URSA_UTILITY_DESCRIPTION", "<style=cIsUtility>Slowing</style>. <style=cIsUtility>Grounding</style>. Slams the ground, dealing <style=cIsDamage>150% damage</style> " +
+            LanguageAPI.Add("URSA_UTILITY_DESCRIPTION", "<style=cIsUtility>Slowing</style>. <style=cIsUtility>Grounding</style>. Slams the ground, dealing <style=cIsDamage>"+ Core.Config.utilityDamageCoefficient.Value * 100 +"% damage</style> " +
                 "and granting you <style=cIsUtility> bonus move speed and jump height </style>.");
             LanguageAPI.Add("URSA_SPECIAL_NAME", "Enrage");
-            LanguageAPI.Add("URSA_SPECIAL_DESCRIPTION", "<style=cIsUtility>Grants 600 armor</style> and <style=cIsDamage>doubles Fury Swipes damage</style> for 8 seconds.");
-            LanguageAPI.Add("URSA_PASSIVE_NAME", "Fury Swipes");
-            LanguageAPI.Add("URSA_PASSIVE_DESCRIPTION", "Consecutive attacks on the same target deal <style=cIsDamage>10% more base damage</style>. If the same target is not attacked after 20 seconds, the bonus damage is lost.");
+            LanguageAPI.Add("URSA_SPECIAL_DESCRIPTION", "<style=cIsUtility>Grants "+ Core.Config.specialBonusArmor.Value +" armor</style> and <style=cIsDamage>"+ Core.Config.specialDamageMult.Value +"x Fury Swipes damage</style> for 8 seconds.");
 
             SkillDef sharpClawsSkillDef = ScriptableObject.CreateInstance<SkillDef>();
             sharpClawsSkillDef.activationState = new SerializableEntityStateType(typeof(States.SharpClaws));
@@ -521,8 +522,8 @@ namespace Ursa
             SkillDef overpowerSkillDef = ScriptableObject.CreateInstance<SkillDef>();
             overpowerSkillDef.activationState = new SerializableEntityStateType(typeof(States.Overpower));
             overpowerSkillDef.activationStateMachineName = "Body";
-            overpowerSkillDef.baseMaxStock = 5;
-            overpowerSkillDef.baseRechargeInterval = 2f;
+            overpowerSkillDef.baseMaxStock = Core.Config.secondaryBaseCharges.Value;
+            overpowerSkillDef.baseRechargeInterval = Core.Config.secondaryBaseCooldown.Value;
             overpowerSkillDef.beginSkillCooldownOnSkillEnd = false;
             overpowerSkillDef.canceledFromSprinting = false;
             overpowerSkillDef.fullRestockOnAssign = true;
@@ -544,7 +545,7 @@ namespace Ursa
             earthshockSkillDef.activationState = new SerializableEntityStateType(typeof(States.Earthshock));
             earthshockSkillDef.activationStateMachineName = "Weapon";
             earthshockSkillDef.baseMaxStock = 1;
-            earthshockSkillDef.baseRechargeInterval = 11f;
+            earthshockSkillDef.baseRechargeInterval = Core.Config.utilityBaseCooldown.Value;
             earthshockSkillDef.beginSkillCooldownOnSkillEnd = true;
             earthshockSkillDef.canceledFromSprinting = false;
             earthshockSkillDef.fullRestockOnAssign = true;
@@ -566,7 +567,7 @@ namespace Ursa
             enrageSkillDef.activationState = new SerializableEntityStateType(typeof(States.Enrage));
             enrageSkillDef.activationStateMachineName = "Body";
             enrageSkillDef.baseMaxStock = 1;
-            enrageSkillDef.baseRechargeInterval = 20f;
+            enrageSkillDef.baseRechargeInterval = Core.Config.specialBaseCooldown.Value;
             enrageSkillDef.beginSkillCooldownOnSkillEnd = true;
             enrageSkillDef.canceledFromSprinting = false;
             enrageSkillDef.fullRestockOnAssign = true;
@@ -591,7 +592,7 @@ namespace Ursa
 
             foreach(GenericSkill i in ursaBody.GetComponentsInChildren<GenericSkill>())
             {
-                BaseUnityPlugin.DestroyImmediate(i);
+                DestroyImmediate(i);
             }
 
             SkillLocator skillLocator = ursaBody.GetComponent<SkillLocator>();
@@ -675,14 +676,14 @@ namespace Ursa
 
         private void InitializeINetMessages()
         {
-            NetworkingAPI.RegisterMessageType<Core.NetMessages.TimedBuffMessage>();
-            NetworkingAPI.RegisterMessageType<Core.NetMessages.RemoveTimedBuffMessage>();
-            NetworkingAPI.RegisterMessageType<Core.NetMessages.BodyFlagsMessage>();
-            NetworkingAPI.RegisterMessageType<Core.NetMessages.RemoveBodyFlagsMessage>();
-            NetworkingAPI.RegisterMessageType<Core.NetMessages.SoundMessage>();
-            NetworkingAPI.RegisterMessageType<Core.NetMessages.AnimationMessage>();
-            NetworkingAPI.RegisterMessageType<Core.NetMessages.UrsaResizeMessage>();
-            NetworkingAPI.RegisterMessageType<Core.NetMessages.UrsaHandsGlowMessage>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.TimedBuff>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.RemoveTimedBuff>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.BodyFlags>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.RemoveBodyFlags>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.Sound>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.Animation>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.UrsaResize>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.UrsaHandsGlow>();
         }
         
         private void CreateDoppelganger() 
@@ -727,21 +728,21 @@ namespace Ursa
             {
                 if (self.HasBuff(enrageBuff))
                 {
-                    self.armor += States.Enrage.bonusArmor;
+                    self.armor += Core.Config.specialBonusArmor.Value;
                 }
                 if (self.HasBuff(earthshockBuff))
                 {
-                    float bonusSpeed = self.moveSpeed * States.Earthshock.bonusMoveSpeed;
-                    float bonusJumpHeight = self.jumpPower * States.Earthshock.bonusJumpHeight;
+                    float bonusSpeed = self.moveSpeed * Core.Config.utilityBonusMoveSpeed.Value;
+                    float bonusJumpHeight = self.jumpPower * Core.Config.utilityBonusJumpPower.Value;
                     self.moveSpeed += bonusSpeed;
                     self.jumpPower += bonusJumpHeight;
                 }
                 if (self.HasBuff(earthshockDebuff))
                 {
                     self.moveSpeed *= States.Earthshock.debuffSlow;
-                    if (!self.gameObject.GetComponent<Miscellaneous.AntiFlying>())
+                    if (!self.gameObject.GetComponent<Miscellaneous.AntiFlyingComponent>())
                     {
-                        self.gameObject.AddComponent<Miscellaneous.AntiFlying>();
+                        self.gameObject.AddComponent<Miscellaneous.AntiFlyingComponent>();
                     }
                 }
             }
@@ -749,7 +750,7 @@ namespace Ursa
 
         private void CharacterBody_ClearTimedBuffs(On.RoR2.CharacterBody.orig_ClearTimedBuffs orig, CharacterBody self, BuffIndex buffType)
         {
-            if (buffType == UrsaPlugin.furySwipesDebuff) return;
+            if (buffType == furySwipesDebuff) return;
 
             orig(self, buffType);
         }
@@ -775,13 +776,12 @@ namespace Ursa
 
             if (attackerCharacterBody.baseNameToken == "URSA_NAME" && damageInfo.procCoefficient >= 1)
             {
-                characterBody.AddTimedBuff(furySwipesDebuff, States.UrsaMain.furySwipesDuration);
+                characterBody.AddTimedBuff(furySwipesDebuff, Core.Config.passiveDebuffDuration.Value);
                 foreach(CharacterBody.TimedBuff i in characterBody.timedBuffs)
                 {
-                    i.timer = States.UrsaMain.furySwipesDuration;
+                    i.timer = Core.Config.passiveDebuffDuration.Value;
                 }
             }
         }
-
     }
 }
