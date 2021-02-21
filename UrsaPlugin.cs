@@ -31,7 +31,7 @@ namespace Ursa
         "BuffAPI",
         "LanguageAPI",
         "SoundAPI",
-        "EntityAPI",
+        "EffectAPI",
         "UnlockablesAPI",
         "ResourcesAPI",
         "EntityAPI",
@@ -87,6 +87,8 @@ namespace Ursa
             LanguageAPI.Add("URSA_DESCRIPTION", "Angry bear." + Environment.NewLine);
             LanguageAPI.Add("URSA_SUBTITLE", "Den Father" + Environment.NewLine);
             LanguageAPI.Add("URSA_OUTRO_FLAVOR", "..and so he left, licking his wounds.");
+
+            LanguageAPI.Add("URSA_SKIN_DEFAULT_NAME", "Default");
 
             ursaBody = PrefabAPI.InstantiateClone(Resources.Load<GameObject>("Prefabs/CharacterBodies/CommandoBody"), "UrsaBody", true);
             NetworkIdentity networkIdentity = ursaBody.GetComponent<NetworkIdentity>();
@@ -266,11 +268,11 @@ namespace Ursa
             {
                 BaseSkins = Array.Empty<SkinDef>(),
                 GameObjectActivations = new SkinDef.GameObjectActivation[0],
-                Icon = Core.Assets.portrait,
+                Icon = Core.Assets.defaultSkinIcon,
                 MeshReplacements = new SkinDef.MeshReplacement[0],
                 MinionSkinReplacements = new SkinDef.MinionSkinReplacement[0],
-                Name = "URSA_NAME",
-                NameToken = "URSA_NAME",
+                Name = "URSA_SKIN_DEFAULT_NAME",
+                NameToken = "URSA_SKIN_DEFAULT_NAME",
                 ProjectileGhostReplacements = new SkinDef.ProjectileGhostReplacement[0],
                 RendererInfos = rendererInfos.ToArray(),
                 RootObject = model,
@@ -474,7 +476,7 @@ namespace Ursa
             BuffDef furySwipesDebuffDef = new BuffDef
             {
                 name = "Fury Swipes",
-                iconPath = "textures/bufficons/texBuffWeakIcon",
+                iconPath = "@Ursa:Assets/UrsaSurvivor/UrsaSurvivorAssets/FurySwipesBuffIcon.png",
                 buffColor = Color.magenta,
                 canStack = true,
                 isDebuff = true,

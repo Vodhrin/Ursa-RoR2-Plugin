@@ -19,6 +19,7 @@ namespace Ursa.Core
         public static Sprite icon4;
         public static Sprite icon5;
         public static Sprite portrait;
+        public static Sprite defaultSkinIcon;
 
         public const string ursaSwingSound = "Ursa_swing";
         public const string ursaHitSound = "Ursa_hit";
@@ -39,6 +40,7 @@ namespace Ursa.Core
                 {
                     MainAssetBundle = AssetBundle.LoadFromStream(assetStream);
                     Provider = new AssetBundleResourcesProvider("@Ursa", MainAssetBundle);
+                    ResourcesAPI.AddProvider(Provider);
                 }
             }
 
@@ -48,6 +50,7 @@ namespace Ursa.Core
             icon4 = MainAssetBundle.LoadAsset<Sprite>("Skill4Icon");
             icon5 = MainAssetBundle.LoadAsset<Sprite>("Skill5Icon");
             portrait = MainAssetBundle.LoadAsset<Sprite>("Portrait");
+            defaultSkinIcon = MainAssetBundle.LoadAsset<Sprite>("DefaultSkinIcon");
 
             earthshockEffect = LoadCustomEffect("earthshockEffect", "");
 
