@@ -22,7 +22,7 @@ namespace Ursa.States
             PlayAnimation("Gesture, HeadOnly, Override", "Roar", "Attack.playbackRate", 1f);
             if (ClientScene.readyConnection != null)
             {
-                Core.Utils.PlayAnimationOnOtherClients(base.gameObject, "Gesture, Headonly, Override", "Roar", 1f);
+                Core.Utils.PlayAnimationOnOtherClients(base.gameObject, "Gesture, HeadOnly, Override", "Roar", 1f);
             }
 
             Core.Utils.ApplyNetworkedTimedBuff(base.gameObject, UrsaPlugin.enrageBuff, 1, Enrage.buffDuration);

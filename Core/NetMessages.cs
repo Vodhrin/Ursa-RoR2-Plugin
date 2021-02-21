@@ -158,7 +158,6 @@ namespace Ursa.Core
                     UrsaPlugin.logger.LogMessage("Error changing bodyflag: character body does not exist!");
                     return;
                 }
-                UrsaPlugin.logger.LogMessage("Applying bodyflag");
                 characterBody.bodyFlags |= this.bodyFlag;
             }
         }
@@ -202,10 +201,7 @@ namespace Ursa.Core
                     UrsaPlugin.logger.LogMessage("Error changing bodyflag: character body does not exist!");
                     return;
                 }
-
-                UrsaPlugin.logger.LogMessage("Removing bodyflag");
                 characterBody.bodyFlags &= ~this.bodyFlag;
-
             }
         }
 
@@ -259,17 +255,19 @@ namespace Ursa.Core
             private string layerName;
             private string animationStateName;
             private float duration;
+            private bool isSharpClaws;
 
             public Animation()
             {
             }
 
-            public Animation(NetworkInstanceId targetId, string layerName, string animationStateName, float duration)
+            public Animation(NetworkInstanceId targetId, string layerName, string animationStateName, float duration, bool isSharpClaws = false)
             {
                 this.targetId = targetId;
                 this.layerName = layerName;
                 this.animationStateName = animationStateName;
                 this.duration = duration;
+                this.isSharpClaws = isSharpClaws;
             }
 
             public void Serialize(NetworkWriter writer)
@@ -278,6 +276,7 @@ namespace Ursa.Core
                 writer.Write(this.layerName);
                 writer.Write(this.animationStateName);
                 writer.Write(this.duration);
+                writer.Write(this.isSharpClaws);
             }
 
             public void Deserialize(NetworkReader reader)
@@ -286,6 +285,7 @@ namespace Ursa.Core
                 this.layerName = reader.ReadString();
                 this.animationStateName = reader.ReadString();
                 this.duration = reader.ReadSingle();
+                this.isSharpClaws = reader.ReadBoolean();
             }
 
             public void OnReceived()
@@ -295,10 +295,16 @@ namespace Ursa.Core
                 GameObject gameObject = Util.FindNetworkObject(this.targetId);
                 ModelLocator modelLocator = gameObject.GetComponent<ModelLocator>();
                 Animator animator = modelLocator.modelTransform.GetComponent<Animator>();
+                int layerIndex = animator.GetLayerIndex(this.layerName);
 
                 if (!animator)
                 {
                     UrsaPlugin.logger.LogMessage("Error syncing animations: target animator not found!");
+                    return;
+                }
+
+                if(layerIndex == -1)
+                {
                     return;
                 }
 
@@ -307,10 +313,17 @@ namespace Ursa.Core
                     return;
                 }
 
-                int layerIndex = animator.GetLayerIndex(this.layerName);
                 animator.speed = 1f;
                 animator.Update(0f);
-                animator.PlayInFixedTime(this.animationStateName, layerIndex, 0);
+                animator.PlayInFixedTime(this.animationStateName, layerIndex, 0f);
+
+                if (!this.isSharpClaws)
+                {
+                    return;
+                }
+
+                bool currentAttack = animator.GetBool("attackSwitch");
+                animator.SetBool("attackSwitch", !currentAttack);
             }
         }
 

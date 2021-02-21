@@ -38,23 +38,21 @@ namespace Ursa.States
 
             base.characterDirection.forward = base.GetAimRay().direction;
 
-            if (animator.GetBool("attack1")) {
-                this.animator.SetBool("attack1", false);
-                this.animator.SetBool("attack2", true);
-                this.hitBoxGroup = base.FindHitBoxGroup("RightClaw");
+            if (animator.GetBool("attackSwitch")) {
+                this.animator.SetBool("attackSwitch", false);
+                this.hitBoxGroup = base.FindHitBoxGroup("LeftClaw");
             }
             else 
             {
-                this.animator.SetBool("attack2", false);
-                this.animator.SetBool("attack1", true);
-                this.hitBoxGroup = base.FindHitBoxGroup("LeftClaw");
+                this.animator.SetBool("attackSwitch", true);
+                this.hitBoxGroup = base.FindHitBoxGroup("RightClaw");
             }
 
             Util.PlayScaledSound(Core.Assets.ursaSwingSound, base.gameObject,  this.attackSpeedStat);
             base.PlayAnimation("Gesture, Override", "Attack", "Attack.playbackRate" ,this.duration);
             if (ClientScene.readyConnection != null) 
             { 
-            Core.Utils.PlayAnimationOnOtherClients(base.gameObject, "Gesture, Override", "Attack", this.duration);
+            Core.Utils.PlayAnimationOnOtherClients(base.gameObject, "Gesture, Override", "Attack", this.duration, true);
             }
 
             Core.Utils.RemoveNetworkedTimedBuff(base.gameObject, UrsaPlugin.overpowerBuff, 1);

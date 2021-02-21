@@ -91,10 +91,8 @@ namespace Ursa.States
             #endregion
 
             #region Resize Ursa to normal size
-			// basically i cannot resize ursa's model anymore in the createcharacter function because the unity project shit itself
-			// i spent >10 hours reimporting the ursa model in different configurations to try to get back to how it was before to no avail
-			// if ursa's model's scale in any axis is >1 then the animator multiplies his scale by 3 whenever the body statemachine is entered
-			// the only solution i have found is to scale him after the animator is initilialized and i still dont know if this will fix the problem completely
+			// Unity animator for some reason resets Ursa's scale to 1 when it initializes, meaning that I can't just set his model's scale in CreateCharacter.
+			// Instead, I just check if it is smaller than it is supposed to be and scale it up using the same method as Enrage resize.
 			if(base.isAuthority && model.localScale.magnitude < UrsaPlugin.ursaBaseSize.magnitude)
             {
 				float n = Time.deltaTime;

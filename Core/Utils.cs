@@ -12,12 +12,12 @@ namespace Ursa.Core
 {
     class Utils
     {
-        public static void PlayAnimationOnOtherClients(GameObject gameObject, string layerName, string animationStateName, float duration)
+        public static void PlayAnimationOnOtherClients(GameObject gameObject, string layerName, string animationStateName, float duration, bool isSharpClaws = false)
         {
             NetworkIdentity networkIdentity = gameObject.GetComponent<NetworkIdentity>();
             if (networkIdentity)
             {
-                new NetMessages.Animation(networkIdentity.netId, layerName, animationStateName, duration)
+                new NetMessages.Animation(networkIdentity.netId, layerName, animationStateName, duration, isSharpClaws)
                     .Send(NetworkDestination.Clients);
             }
         }
