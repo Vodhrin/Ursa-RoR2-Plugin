@@ -12,18 +12,12 @@ namespace Ursa.States
 {
 	public class UrsaMain : GenericCharacterMain
 	{
-		public static float furySwipesDamageMult;
-		public static float furySwipesDuration = 20f;
-		public static float baseMass;
-
 		private Transform model;
 
 		public override void OnEnter()
 		{
 			base.OnEnter();
 			this.model = base.GetModelTransform();
-			UrsaMain.baseMass = base.rigidbody.mass;
-			UrsaMain.furySwipesDamageMult = Core.Config.passiveBaseDamageMult.Value;
 		}
 
 		public override void OnExit()
@@ -58,19 +52,6 @@ namespace Ursa.States
 				base.GetModelChildLocator().FindChild("R_Hand").GetComponent<Light>().enabled = false;
 				base.GetModelChildLocator().FindChild("L_Hand").GetComponent<Light>().enabled = false;
 				Core.Utils.HandsGlowOnOtherClients(base.gameObject, false);
-			}
-			#endregion
-
-			#region Multiplying Fury Swipes if Enraged.
-			if (base.isAuthority && base.characterBody.HasBuff(UrsaPlugin.enrageBuff))
-			{
-				UrsaMain.furySwipesDamageMult = Core.Config.passiveBaseDamageMult.Value * 2f;
-				base.rigidbody.mass *= Core.Config.specialMassMult.Value;
-			}
-			else if (base.isAuthority && !base.characterBody.HasBuff(UrsaPlugin.enrageBuff))
-			{
-				UrsaMain.furySwipesDamageMult = Core.Config.passiveBaseDamageMult.Value;
-				base.rigidbody.mass = UrsaMain.baseMass;
 			}
 			#endregion
 

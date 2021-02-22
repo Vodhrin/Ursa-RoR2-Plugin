@@ -395,6 +395,8 @@ namespace Ursa
             aimAnimator.pitchGiveupRange = 30f;
             aimAnimator.yawGiveupRange = 10f;
             aimAnimator.giveupDuration = 8f;
+
+            ursaBody.AddComponent<Miscellaneous.FurySwipesController>();
         }
 
         private void InitializeCharacter() 
@@ -780,11 +782,12 @@ namespace Ursa
 
             CharacterBody characterBody = self.gameObject.GetComponent<CharacterBody>();
             CharacterBody attackerCharacterBody = damageInfo.attacker.GetComponent<CharacterBody>();
+            Miscellaneous.FurySwipesController furySwipesController = attackerCharacterBody.GetComponent<Miscellaneous.FurySwipesController>();
 
-            if(attackerCharacterBody.baseNameToken == "URSA_NAME" && characterBody.HasBuff(furySwipesDebuff) && damageInfo.procCoefficient >= 1)
+            if(attackerCharacterBody.baseNameToken == "URSA_NAME" && characterBody.HasBuff(furySwipesDebuff) && damageInfo.procCoefficient >= 1 && furySwipesController)
             {
                 int count = characterBody.GetBuffCount(furySwipesDebuff);
-                float bonusDamage = count * (attackerCharacterBody.damage * States.UrsaMain.furySwipesDamageMult);
+                float bonusDamage = count * (attackerCharacterBody.damage * furySwipesController.furySwipesMult);
                 damageInfo.damage += bonusDamage;
             }
 
