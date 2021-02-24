@@ -7,7 +7,7 @@ using R2API;
 
 namespace Ursa.Core
 {
-    public static class Assets
+    static class Assets
     {
 
         public static AssetBundle MainAssetBundle = null;
@@ -31,7 +31,7 @@ namespace Ursa.Core
 
         public static GameObject earthshockEffect;
 
-        public static void InitializeAssets()
+        public static void Initialize()
         {
 
             if (MainAssetBundle == null)

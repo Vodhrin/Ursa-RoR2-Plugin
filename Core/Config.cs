@@ -58,7 +58,7 @@ namespace Ursa.Core
         public static ConfigEntry<float> specialBuffDuration;
         public static ConfigEntry<float> specialBaseCooldown;
 
-        public static void ReadConfig()
+        public static void Read()
         {
             baseMaxHealth = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("01 - Character Stats", "Base Max Health"), Core.Constants.ursaBaseMaxHealth, new ConfigDescription("", null, Array.Empty<object>()));
             levelMaxHealth = UrsaPlugin.instance.Config.Bind<float>(new ConfigDefinition("01 - Character Stats", "Level Max Health"), Core.Constants.ursaLevelMaxHealth, new ConfigDescription("", null, Array.Empty<object>()));

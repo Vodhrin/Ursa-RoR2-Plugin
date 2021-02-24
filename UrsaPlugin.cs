@@ -59,10 +59,11 @@ namespace Ursa
         {
             instance = this;
 
-            Core.Assets.InitializeAssets();
-            Core.Config.ReadConfig();
+            Core.Assets.Initialize();
+            Core.Config.Read();
             CreateHooks();
             CreateCharacter();
+            Core.ItemDisplays.Create();
             InitializeCharacter();
             InitializeBuffs();
             InitializeSkills();
@@ -81,7 +82,7 @@ namespace Ursa
             On.RoR2.HealthComponent.TakeDamage += HealthComponent_TakeDamage;
         }
 
-        static void CreateCharacter() 
+        private static void CreateCharacter() 
         {
             LanguageAPI.Add("URSA_NAME", "Ursa");
             LanguageAPI.Add("URSA_DESCRIPTION", "Angry bear." + Environment.NewLine);

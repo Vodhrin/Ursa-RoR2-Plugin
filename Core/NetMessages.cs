@@ -10,7 +10,7 @@ using R2API.Networking.Interfaces;
 
 namespace Ursa.Core
 {
-    internal class NetMessages
+    class NetMessages
     {
 
         public class TimedBuff : INetMessage

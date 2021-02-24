@@ -10,7 +10,7 @@ using EntityStates;
 
 namespace Ursa.States
 {
-	public class UrsaMain : GenericCharacterMain
+	class UrsaMain : GenericCharacterMain
 	{
 		private Transform model;
 
