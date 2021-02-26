@@ -36,7 +36,7 @@ namespace Ursa.States
 			base.FixedUpdate();
 
 			#region Change run animation if low health.
-			if (base.healthComponent.combinedHealth <= base.healthComponent.fullCombinedHealth / 2)
+			if (base.healthComponent.combinedHealth <= base.healthComponent.fullCombinedHealth / 4)
 			{
 				this.GetModelAnimator().SetBool("isLowHealth", true);
 			}
