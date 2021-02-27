@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UrsaGestureMask
+  m_Mask: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Root_0
+    m_Weight: 0
+  - m_Path: Root_0/buttArmor5_0
+    m_Weight: 0
+  - m_Path: Root_0/Spine_0
+    m_Weight: 0
+  - m_Path: Root_0/Spine_0/Spine_1
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/backHair6_0
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/backHair6_0/ArbitraryChain6_plc6
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/backHair7_0
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/backHair7_0/ArbitraryChain7_plc7
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_L
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_L/bicep_L
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_L/bicep_L/elbow_L
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_L/bicep_L/elbow_L/wrist_L
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_L/bicep_L/elbow_L/wrist_L/finger2_0_A_L
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_L/bicep_L/elbow_L/wrist_L/finger3_0_A_R
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_L/bicep_L/elbow_L/wrist_L/finger4_0_B_L
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_L/bicep_L/elbow_L/wrist_L/finger5_0_B_R
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_L/bicep_L/elbow_L/wrist_L/thumb6_0_C_L
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_L/bicep_L/elbow_L/wrist_L/thumb6_0_C_L/thumb6_1_C_L
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_R
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_R/bicep_R
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_R/bicep_R/elbow_R
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_R/bicep_R/elbow_R/wrist_R
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_R/bicep_R/elbow_R/wrist_R/finger1_0
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_R/bicep_R/elbow_R/wrist_R/finger2_0
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_R/bicep_R/elbow_R/wrist_R/finger8_0_D_L
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_R/bicep_R/elbow_R/wrist_R/finger9_0_D_R
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_R/bicep_R/elbow_R/wrist_R/thumb7_0_C_R
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/clavicle_R/bicep_R/elbow_R/wrist_R/thumb7_0_C_R/thumb7_1_C_R
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/Head_0
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/Head_0/Head_1
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/Head_0/Head_1/ear0_0_L
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/Head_0/Head_1/ear1_0_R
+    m_Weight: 1
+  - m_Path: Root_0/Spine_0/Spine_1/Spine_2/Spine_3/Head_0/Head_1/jaw0_0
+    m_Weight: 1
+  - m_Path: Root_0/thigh_L
+    m_Weight: 0
+  - m_Path: Root_0/thigh_L/knee_L
+    m_Weight: 0
+  - m_Path: Root_0/thigh_L/knee_L/ankle_L
+    m_Weight: 0
+  - m_Path: Root_0/thigh_L/knee_L/ankle_L/toeBase_L
+    m_Weight: 0
+  - m_Path: Root_0/thigh_R
+    m_Weight: 0
+  - m_Path: Root_0/thigh_R/knee_R
+    m_Weight: 0
+  - m_Path: Root_0/thigh_R/knee_R/ankle_R
+    m_Weight: 0
+  - m_Path: Root_0/thigh_R/knee_R/ankle_R/toeBase_R
+    m_Weight: 0
+  - m_Path: Root_0/thighArmor3_0
+    m_Weight: 0
+  - m_Path: Root_0/thighArmor4_0
+    m_Weight: 0
+  - m_Path: ursa_arms
+    m_Weight: 0
+  - m_Path: ursa_back
+    m_Weight: 0
+  - m_Path: ursa_base
+    m_Weight: 0
+  - m_Path: ursa_belt
+    m_Weight: 0
+  - m_Path: ursa_head
+    m_Weight: 0
