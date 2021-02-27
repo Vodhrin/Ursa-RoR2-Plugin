@@ -39,7 +39,9 @@ namespace Ursa.States
             }
             
             // AimMode cant be used rn because he doesn't actually have any strafing animations lol.
-            //StartAimMode(2);
+            // yay strafe animations
+            //      though the hurt run still doesn't strafe i might try something different with this
+            StartAimMode(2);
             base.characterDirection.forward = base.GetAimRay().direction;
 
 

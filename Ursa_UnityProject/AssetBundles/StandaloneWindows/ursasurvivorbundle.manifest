@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1001049154
+CRC: 2300521468
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 24cd4060fdc7fe73fcef5aa7b4fe9469
+    Hash: 908848d79ca3b7f1c508874d1e310b7b
   TypeTreeHash:
     serializedVersion: 2
     Hash: 526453b4ddd13caf5756725ccae4253a
@@ -109,6 +109,7 @@ Assets:
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_arms_translucency.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_back_rimMask.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/idle.fbx
+- Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/ursarun_new.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_arms_metalnessMask.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_back_fresnelWarpSpec.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_head_fresnelWarpRim.tga
