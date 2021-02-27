@@ -37,8 +37,11 @@ namespace Ursa.States
             {
                 this.duration = SharpClaws.baseDuration / this.attackSpeedStat;
             }
+            
+            // AimMode cant be used rn because he doesn't actually have any strafing animations lol.
+            //StartAimMode(2);
+            base.characterDirection.forward = base.GetAimRay().direction;
 
-            StartAimMode(2);
 
             if (animator.GetBool("attackSwitch")) 
             {
