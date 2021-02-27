@@ -68,6 +68,13 @@ ModelImporter:
     100124: wrist_L
     100126: wrist_R
     100128: Armature
+    100130: ArbitraryChain6_plc6
+    100132: ArbitraryChain7_plc7
+    100134: ursa_arms
+    100136: ursa_back
+    100138: ursa_base
+    100140: ursa_belt
+    100142: ursa_head
     400000: ankle_L
     400002: ankle_R
     400004: backHair6_0
@@ -133,8 +140,30 @@ ModelImporter:
     400124: wrist_L
     400126: wrist_R
     400128: Armature
+    400130: ArbitraryChain6_plc6
+    400132: ArbitraryChain7_plc7
+    400134: ursa_arms
+    400136: ursa_back
+    400138: ursa_base
+    400140: ursa_belt
+    400142: ursa_head
+    2100000: blinn2
+    2100002: blinn1
+    2100004: blinn3
+    2100006: blinn5
+    2100008: blinn4
+    4300000: ursa_back
+    4300002: ursa_arms
+    4300004: ursa_head
+    4300006: ursa_base
+    4300008: ursa_belt
     7400000: Armature|run_forward
     9500000: //RootNode
+    13700000: ursa_arms
+    13700002: ursa_back
+    13700004: ursa_base
+    13700006: ursa_belt
+    13700008: ursa_head
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
