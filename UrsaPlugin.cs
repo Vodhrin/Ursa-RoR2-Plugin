@@ -212,7 +212,7 @@ namespace Ursa
             GameObject rightClawGameObject = new GameObject("RightClawHitBox");
             Transform rightClaw = childLocator.FindChild("R_Hand");
             rightClawGameObject.transform.parent = rightClaw;
-            rightClawGameObject.transform.localPosition = Vector3.zero;
+            rightClawGameObject.transform.localPosition = new Vector3(-0.2f, 0.2f, 0.3f);
             rightClawGameObject.transform.localScale = Vector3.one * 6.25f;
             rightClawGameObject.transform.localRotation = Quaternion.identity;
             HitBox rightClawHitBox = rightClawGameObject.AddComponent<HitBox>();
@@ -220,7 +220,7 @@ namespace Ursa
             GameObject leftClawGameObject = new GameObject("LeftClawHitBox");
             Transform leftClaw = childLocator.FindChild("L_Hand");
             leftClawGameObject.transform.parent = leftClaw;
-            leftClawGameObject.transform.localPosition = Vector3.zero;
+            leftClawGameObject.transform.localPosition = new Vector3(-0.2f, 0.2f, 0.3f);
             leftClawGameObject.transform.localScale = Vector3.one * 6.25f;
             leftClawGameObject.transform.localRotation = Quaternion.identity;
             HitBox leftClawHitBox = leftClawGameObject.AddComponent<HitBox>();

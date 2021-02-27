@@ -20,6 +20,8 @@ namespace Ursa.States
         private float duration;
         private Animator animator;
         private HitBoxGroup hitBoxGroup;
+        private bool hasHopped;
+        private OverlapAttack attack;
 
         public override void OnEnter()
         {
@@ -36,9 +38,10 @@ namespace Ursa.States
                 this.duration = SharpClaws.baseDuration / this.attackSpeedStat;
             }
 
-            base.characterDirection.forward = base.GetAimRay().direction;
+            StartAimMode(2);
 
-            if (animator.GetBool("attackSwitch")) {
+            if (animator.GetBool("attackSwitch")) 
+            {
                 this.animator.SetBool("attackSwitch", false);
                 this.hitBoxGroup = base.FindHitBoxGroup("LeftClaw");
             }
@@ -47,6 +50,24 @@ namespace Ursa.States
                 this.animator.SetBool("attackSwitch", true);
                 this.hitBoxGroup = base.FindHitBoxGroup("RightClaw");
             }
+
+            attack = new OverlapAttack 
+            {
+                attacker = base.gameObject,
+                inflictor = base.gameObject,
+                damage = base.damageStat * SharpClaws.damageCoefficient,
+                damageColorIndex = DamageColorIndex.Default,
+                damageType = DamageType.Generic,
+                isCrit = Util.CheckRoll(this.critStat, this.characterBody.master),
+                hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ImpactImpSwipe"),
+                hitBoxGroup = hitBoxGroup,
+                impactSound = Core.Assets.ursaHitNetworkSoundEventDef.index,
+                procChainMask = default(ProcChainMask),
+                procCoefficient = SharpClaws.procCoefficient,
+                forceVector = Vector3.zero,
+                pushAwayForce = 400f,
+                teamIndex = base.GetTeam(),
+            };
 
             Util.PlayScaledSound(Core.Assets.ursaSwingSound, base.gameObject,  this.attackSpeedStat);
             base.PlayAnimation("Gesture, Override", "Attack", "Attack.playbackRate" ,this.duration);
@@ -67,11 +88,15 @@ namespace Ursa.States
         {
             base.FixedUpdate();
 
-            if(base.fixedAge >= this.duration/4 && !this.hasFired)
+            bool fireStarted = base.fixedAge >= this.duration * 0.2f;
+            bool fireEnded = base.fixedAge >= this.duration * 0.5f;
+
+            //to guarantee that if the attack speed is so fast that fixedage skipped past the firing duration a hitbox still comes out
+            if ((fireStarted && !fireEnded) || (fireStarted && fireEnded && !this.hasFired))
             {
                 this.hasFired = true;
                 this.Attack();
-            }
+            }                
 
             if(base.fixedAge >= this.duration)
             {
@@ -88,29 +113,17 @@ namespace Ursa.States
 
         private void Attack()
         {
-            OverlapAttack attack = new OverlapAttack
-            {
-                attacker = base.gameObject,
-                inflictor = base.gameObject,
-                damage = base.damageStat * SharpClaws.damageCoefficient,
-                damageColorIndex = DamageColorIndex.Default,
-                damageType = DamageType.Generic,
-                isCrit = Util.CheckRoll(this.critStat, this.characterBody.master),
-                hitEffectPrefab = Resources.Load<GameObject>("prefabs/effects/impacteffects/ImpactImpSwipe"),
-                hitBoxGroup = hitBoxGroup,
-                impactSound = Core.Assets.ursaHitNetworkSoundEventDef.index,
-                procChainMask = default(ProcChainMask),
-                procCoefficient = SharpClaws.procCoefficient,
-                forceVector = Vector3.zero,
-                pushAwayForce = 400f,
-                teamIndex = base.GetTeam(),
-            };
-
             if (base.isAuthority)
             {
-                if (attack.Fire() && !base.isGrounded)
+                if (attack.Fire() && !base.isGrounded && !this.hasHopped)
                 {
                     base.SmallHop(base.characterMotor, SharpClaws.hopVelocity);
+                    this.hasHopped = true;
+                }
+
+                if (!this.hasFired) 
+                {
+                    //play swipe effect
                 }
             }
         }
