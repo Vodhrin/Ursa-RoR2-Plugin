@@ -22,7 +22,7 @@ namespace Ursa
 {
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
-    [BepInPlugin("com.Vodhr.UrsaSurvivor", "Ursa Survivor", "0.3.0")]
+    [BepInPlugin("com.Vodhr.UrsaSurvivor", "Ursa Survivor", "1.0.0")]
     [R2APISubmoduleDependency(new string[]
     {
         "PrefabAPI",
@@ -501,7 +501,7 @@ namespace Ursa
             LanguageAPI.Add("URSA_PRIMARY_NAME", "Sharp Claws");
             LanguageAPI.Add("URSA_PRIMARY_DESCRIPTION", "Swipe at enemies in front of you, dealing <style=cIsDamage>"+ Core.Config.primaryDamageCoefficient.Value * 100 +"% damage</style>.");
             LanguageAPI.Add("URSA_SECONDARY_NAME", "Overpower");
-            LanguageAPI.Add("URSA_SECONDARY_DESCRIPTION", "For each charge consumed, you gain <style=cIsUtility>"+ Core.Config.secondaryAttackSpeedMult.Value +"x attack speed</style> on your next use of Sharp Claws. Has <style=cIsUtility>"+ Core.Config.secondaryBaseCharges.Value +" charges</style> at base.");
+            LanguageAPI.Add("URSA_SECONDARY_DESCRIPTION", "For each charge consumed, you gain<style=cIsUtility>"+ Core.Config.secondaryAttackSpeedMult.Value +"x attack speed</style> on your next use of Sharp Claws. Has <style=cIsUtility>"+ Core.Config.secondaryBaseCharges.Value +" charges</style> at base.");
             LanguageAPI.Add("URSA_UTILITY_NAME", "Earthshock");
             LanguageAPI.Add("URSA_UTILITY_DESCRIPTION", "<style=cIsUtility>Slowing</style>. <style=cIsUtility>Grounding</style>. Slams the ground, dealing <style=cIsDamage>"+ Core.Config.utilityDamageCoefficient.Value * 100 +"% damage</style> " +
                 "and granting you <style=cIsUtility> bonus move speed and jump height </style>.");
