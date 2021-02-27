@@ -1,0 +1,209 @@
+fileFormatVersion: 2
+guid: 1215bdd4ba78c8f41a0a896666d3d04d
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: ankle_L
+    100002: ankle_R
+    100004: ArbitraryChain6_plc6
+    100006: ArbitraryChain7_plc7
+    100008: backHair6_0
+    100010: backHair7_0
+    100012: bicep_L
+    100014: bicep_R
+    100016: buttArmor5_0
+    100018: clavicle_L
+    100020: clavicle_R
+    100022: ear0_0_L
+    100024: ear1_0_R
+    100026: elbow_L
+    100028: elbow_R
+    100030: finger1_0
+    100032: finger2_0
+    100034: finger2_0_A_L
+    100036: finger3_0_A_R
+    100038: finger4_0_B_L
+    100040: finger5_0_B_R
+    100042: finger8_0_D_L
+    100044: finger9_0_D_R
+    100046: Head_0
+    100048: Head_1
+    100050: jaw0_0
+    100052: knee_L
+    100054: knee_R
+    100056: Root_0
+    100058: Spine_0
+    100060: Spine_1
+    100062: Spine_2
+    100064: Spine_3
+    100066: thigh_L
+    100068: thigh_R
+    100070: thighArmor3_0
+    100072: thighArmor4_0
+    100074: thumb6_0_C_L
+    100076: thumb6_1_C_L
+    100078: thumb7_0_C_R
+    100080: thumb7_1_C_R
+    100082: toeBase_L
+    100084: toeBase_R
+    100086: ursa_arms
+    100088: ursa_back
+    100090: ursa_base
+    100092: ursa_belt
+    100094: //RootNode
+    100096: ursa_head
+    100098: wrist_L
+    100100: wrist_R
+    400000: ankle_L
+    400002: ankle_R
+    400004: ArbitraryChain6_plc6
+    400006: ArbitraryChain7_plc7
+    400008: backHair6_0
+    400010: backHair7_0
+    400012: bicep_L
+    400014: bicep_R
+    400016: buttArmor5_0
+    400018: clavicle_L
+    400020: clavicle_R
+    400022: ear0_0_L
+    400024: ear1_0_R
+    400026: elbow_L
+    400028: elbow_R
+    400030: finger1_0
+    400032: finger2_0
+    400034: finger2_0_A_L
+    400036: finger3_0_A_R
+    400038: finger4_0_B_L
+    400040: finger5_0_B_R
+    400042: finger8_0_D_L
+    400044: finger9_0_D_R
+    400046: Head_0
+    400048: Head_1
+    400050: jaw0_0
+    400052: knee_L
+    400054: knee_R
+    400056: Root_0
+    400058: Spine_0
+    400060: Spine_1
+    400062: Spine_2
+    400064: Spine_3
+    400066: thigh_L
+    400068: thigh_R
+    400070: thighArmor3_0
+    400072: thighArmor4_0
+    400074: thumb6_0_C_L
+    400076: thumb6_1_C_L
+    400078: thumb7_0_C_R
+    400080: thumb7_1_C_R
+    400082: toeBase_L
+    400084: toeBase_R
+    400086: ursa_arms
+    400088: ursa_back
+    400090: ursa_base
+    400092: ursa_belt
+    400094: //RootNode
+    400096: ursa_head
+    400098: wrist_L
+    400100: wrist_R
+    2100000: blinn5
+    2100002: blinn1
+    2100004: blinn3
+    2100006: blinn2
+    2100008: blinn4
+    4300000: ursa_base
+    4300002: ursa_arms
+    4300004: ursa_head
+    4300006: ursa_back
+    4300008: ursa_belt
+    9500000: //RootNode
+    13700000: ursa_arms
+    13700002: ursa_back
+    13700004: ursa_base
+    13700006: ursa_belt
+    13700008: ursa_head
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
