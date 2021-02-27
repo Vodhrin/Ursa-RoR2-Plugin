@@ -14,7 +14,7 @@ namespace Ursa.States
 	{
 		private Transform model;
 		private ChildLocator childLocator;
-		private ParticleSystem.EmissionModule overpowerParticleSystemEmission;
+		private ParticleSystem.EmissionModule overpowerParticleSystemEmission; 
 
 		public override void OnEnter()
 		{
@@ -36,11 +36,11 @@ namespace Ursa.States
 			#region Change run animation if low health.
 			if (base.healthComponent.combinedHealth <= base.healthComponent.fullCombinedHealth / 4)
 			{
-				this.GetModelAnimator().SetBool("isLowHealth", true);
+				this.GetModelAnimator().SetFloat("isLowHealth", 1, 0.1f, Time.fixedDeltaTime);
 			}
 			else
 			{
-				this.GetModelAnimator().SetBool("isLowHealth", false);
+				this.GetModelAnimator().SetFloat("isLowHealth", 0, 0.1f, Time.fixedDeltaTime);
 			}
 			#endregion
 
