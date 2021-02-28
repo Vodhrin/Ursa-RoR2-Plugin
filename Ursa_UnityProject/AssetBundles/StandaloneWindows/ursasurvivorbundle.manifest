@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3203948150
+CRC: 2226012951
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0478739925a783fae3e3aa7a68414f83
+    Hash: 70dd7fefe4b66b38cae2909ce8a1992e
   TypeTreeHash:
     serializedVersion: 2
     Hash: 526453b4ddd13caf5756725ccae4253a
@@ -71,7 +71,6 @@ Assets:
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Animator/animUrsaOld.controller
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_head_selfIllumMask.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/death.fbx
-- Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/run_right.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_belt_rimMask.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/base/__ursa_base_detail.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/base/__ursa_base_color.tga
@@ -81,7 +80,6 @@ Assets:
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_back_metalnessMask.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_head_color.mat
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_back_specularMask.tga
-- Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/run_left.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/spawn.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/ursa.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/custommaterials/ursa_back.mat
@@ -91,7 +89,6 @@ Assets:
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_belt_fresnelWarpRim.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Effects/Meshes/donutMesh.asset
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/base/__ursa_base_fresnelWarpColor.tga
-- Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/run_hurt_backward.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Effects/Material/matEarthShockWave.mat
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Animator/animUrsa.controller
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Effects/Material/matDetailRock.mat
@@ -113,7 +110,6 @@ Assets:
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_arms_metalnessMask.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_back_fresnelWarpSpec.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_head_fresnelWarpRim.tga
-- Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/run_hurt_left.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/flail.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/base/__ursa_base_selfIllumMask.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/base/__ursa_base_detailMask.tga
@@ -121,7 +117,6 @@ Assets:
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_belt_specularExponent.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_arms_cubeMap.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Effects/Meshes/donut6Mesh.asset
-- Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/run_backward.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/OldPortrait.png
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/base/__ursa_base_metalnessMask.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_arms_fresnelWarpColor.tga
@@ -129,7 +124,6 @@ Assets:
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_back_specularExponent.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_back_color.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Effects/Material/Textures/texSmokePuffSpeckledDisplacement.png
-- Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/run_hurt_right.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_arms_color.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/base/__ursa_base_normal.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_head_metalnessMask.tga
@@ -140,6 +134,7 @@ Assets:
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_arms_rimMask.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/base/__ursa_base_cubeMap.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Skill5Icon.png
+- Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/ursarun_new2.fbx
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Skill3Icon.png
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_head_cubeMap.tga
 - Assets/UrsaSurvivor/UrsaSurvivorAssets/Models/materials/ursa_arms_specularExponent.tga
