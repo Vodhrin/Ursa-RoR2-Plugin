@@ -86,7 +86,7 @@ namespace Ursa.Miscellaneous
 
         private void FixedUpdate()
         {
-            if (!this.body.HasBuff(UrsaPlugin.earthshockDebuff) || !this.body)
+            if (!this.body.HasBuff(Survivor.Buffs.earthshockDebuff) || !this.body)
             {
                 this.body.bodyFlags &= ~CharacterBody.BodyFlags.IgnoreFallDamage;
                 Destroy(this);

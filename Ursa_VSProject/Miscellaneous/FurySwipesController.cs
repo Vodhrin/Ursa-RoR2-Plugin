@@ -20,7 +20,7 @@ namespace Ursa.Miscellaneous
 
         private void FixedUpdate()
         {
-            if (characterBody.HasBuff(UrsaPlugin.enrageBuff))
+            if (characterBody.HasBuff(Survivor.Buffs.enrageBuff))
             {
                 this.furySwipesMult = Core.Config.passiveBaseDamageMult.Value * 2f;
                 this.characterBody.rigidbody.mass = Core.Config.specialMassMult.Value * this.baseMass;

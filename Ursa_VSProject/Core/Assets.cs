@@ -10,8 +10,7 @@ namespace Ursa.Core
     static class Assets
     {
 
-        public static AssetBundle MainAssetBundle = null;
-        public static AssetBundleResourcesProvider Provider;
+        public static AssetBundle mainAssetBundle = null;
 
         public static Sprite icon1;
         public static Sprite icon2;
@@ -20,37 +19,35 @@ namespace Ursa.Core
         public static Sprite icon5;
         public static Sprite portrait;
         public static Sprite defaultSkinIcon;
+        public static Sprite furySwipesBuffIcon;
 
-        public const string ursaSwingSound = "Ursa_swing";
-        public const string ursaHitSound = "Ursa_hit";
-        public const string ursaOverpowerSound = "Ursa_overpower";
-        public const string ursaEarthshockSound = "Ursa_earthshock";
-        public const string ursaEnrageSound = "Ursa_enrage";
-
-        public static NetworkSoundEventDef ursaHitNetworkSoundEventDef;
+        public const string SwingSound = "Ursa_swing";
+        public const string HitSound = "Ursa_hit";
+        public const string OverpowerSound = "Ursa_overpower";
+        public const string EarthshockSound = "Ursa_earthshock";
+        public const string EnrageSound = "Ursa_enrage";
 
         public static GameObject earthshockEffect;
 
         public static void Initialize()
         {
 
-            if (MainAssetBundle == null)
+            if (mainAssetBundle == null)
             {
                 using (var assetStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Ursa.ursasurvivorbundle"))
                 {
-                    MainAssetBundle = AssetBundle.LoadFromStream(assetStream);
-                    Provider = new AssetBundleResourcesProvider("@Ursa", MainAssetBundle);
-                    ResourcesAPI.AddProvider(Provider);
+                    mainAssetBundle = AssetBundle.LoadFromStream(assetStream);
                 }
             }
 
-            icon1 = MainAssetBundle.LoadAsset<Sprite>("Skill1Icon");
-            icon2 = MainAssetBundle.LoadAsset<Sprite>("Skill2Icon");
-            icon3 = MainAssetBundle.LoadAsset<Sprite>("Skill3Icon");
-            icon4 = MainAssetBundle.LoadAsset<Sprite>("Skill4Icon");
-            icon5 = MainAssetBundle.LoadAsset<Sprite>("Skill5Icon");
-            portrait = MainAssetBundle.LoadAsset<Sprite>("Portrait");
-            defaultSkinIcon = MainAssetBundle.LoadAsset<Sprite>("DefaultSkinIcon");
+            icon1 = mainAssetBundle.LoadAsset<Sprite>("Skill1Icon");
+            icon2 = mainAssetBundle.LoadAsset<Sprite>("Skill2Icon");
+            icon3 = mainAssetBundle.LoadAsset<Sprite>("Skill3Icon");
+            icon4 = mainAssetBundle.LoadAsset<Sprite>("Skill4Icon");
+            icon5 = mainAssetBundle.LoadAsset<Sprite>("Skill5Icon");
+            portrait = mainAssetBundle.LoadAsset<Sprite>("Portrait");
+            defaultSkinIcon = mainAssetBundle.LoadAsset<Sprite>("DefaultSkinIcon");
+            furySwipesBuffIcon = mainAssetBundle.LoadAsset<Sprite>("FurySwipesBuffIcon.png");
 
             earthshockEffect = LoadCustomEffect("earthshockEffect", "");
 
@@ -65,7 +62,7 @@ namespace Ursa.Core
         //Yoinked from rob's PaladinMod :)
         private static GameObject LoadCustomEffect(string resourceName, string soundName)
         {
-            GameObject newEffect = MainAssetBundle.LoadAsset<GameObject>(resourceName);
+            GameObject newEffect = mainAssetBundle.LoadAsset<GameObject>(resourceName);
 
             newEffect.AddComponent<DestroyOnTimer>().duration = 12;
             newEffect.AddComponent<NetworkIdentity>();

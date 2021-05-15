@@ -10,8 +10,19 @@ using R2API.Networking.Interfaces;
 
 namespace Ursa.Core
 {
-    class NetMessages
+    internal class NetMessages
     {
+        public static void Initialize()
+        {
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.TimedBuff>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.RemoveTimedBuff>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.BodyFlags>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.RemoveBodyFlags>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.Sound>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.Animation>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.UrsaResize>();
+            NetworkingAPI.RegisterMessageType<Core.NetMessages.UrsaHandsGlow>();
+        }
 
         public class TimedBuff : INetMessage
         {
@@ -245,7 +256,7 @@ namespace Ursa.Core
                     return;
                 }
 
-                Util.PlayScaledSound(soundName, gameObject, rate);
+                Util.PlayAttackSpeedSound(soundName, gameObject, rate);
             }
         }
 
