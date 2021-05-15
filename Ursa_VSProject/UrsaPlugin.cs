@@ -22,7 +22,7 @@ namespace Ursa
 {
     [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.HardDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
-    [BepInPlugin("com.Vodhr.UrsaSurvivor", "Ursa Survivor", "1.0.1")]
+    [BepInPlugin("com.Vodhr.UrsaSurvivor", "Ursa Survivor", "0.3.0")]
     [R2APISubmoduleDependency(new string[]
     {
         "PrefabAPI",
